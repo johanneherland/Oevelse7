@@ -1,0 +1,159 @@
+/* Mobil-first tilnærming, css tilpasset mobil */
+
+#grid-container {
+    display: grid; /* oppretter CSS Grid */
+    grid-template-columns: 1fr; 
+    grid-template-rows: repeat(3, auto); /* Lager 3 rader */
+    padding: 1.5rem; /* Luft mellom grid-elementer og nettsidens grenser */
+}
+
+/* Headeren skal ha en vertikal navigasjonsmeny med logoen over menyen. Navigasjonslenkene skal sentreres på mobil */
+header{
+    grid-column: 1 / 2; /* elementet strekker seg fra kolonne-linje 1 til 4 */
+    grid-row: 1 / 2; /* elementet strekker seg fra rad-linje 1 til 2 */
+    display: flex; /* oppretter flex-container */
+    flex-direction: column; /* ordner header (logo og navigasjon) vertikalt */
+    justify-content: center; /* sentrerer header horisontalt */
+    align-items: center; /* sentrerer header vertikalt */
+}
+
+nav ul {
+    list-style: none; /* fjerner bullet points i liste */
+    display: flex; /* oppretter flex-container */
+    flex-direction: column; /* elementer i navigasjon legger seg i en horisontal rad fra venstre til høyre */
+    gap: 1rem; /* lik avstand mellom lenker */
+    justify-content: center; /* sentrerer header horisontalt */
+    align-items: center; /* sentrerer header vertikalt */
+}
+
+/* Innholdet skal vises under hverandre */
+main {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    display: flex; /* oppretter flex-container */
+    flex-direction: column; /* elementer i navigasjon legger seg i en horisontal rad fra venstre til høyre */
+    gap: 1rem; /* lik avstand mellom lenker */
+    justify-content: center; /* sentrerer header horisontalt */
+    align-items: center; /* sentrerer header vertikalt */
+}
+
+#change-order {
+
+}
+
+/* Innholdet skal vises under hverandre */
+footer {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    display: flex; /* oppretter flex-container */
+    flex-direction: column; /* elementer i navigasjon legger seg i en horisontal rad fra venstre til høyre */
+    gap: 1rem; /* lik avstand mellom lenker */
+    justify-content: center; /* sentrerer header horisontalt */
+    align-items: center; /* sentrerer header vertikalt */
+}
+
+/* Trying to figure out responsive typography ?? */
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    background-color: #f0ece9;
+}
+
+h1{
+    font-size: 2rem;
+}
+h2{
+    font-size: 1.5rem;
+}
+h3{
+    font-size: 1rem;
+}
+
+html{
+    font-size: calc(14px + 0.5vw);
+}
+
+/* Styler alle lenker som vanlig sort tekst */
+a {
+    text-decoration: none; /* fjerner understrek fra lenker */
+    color: black; /* endrer farge på lenker til svart */
+}
+
+/* bilder tilpasses skjermstørrelsen ved hjelp av picture-taggen. 
+Forskjellige bildeoppløsninger skal lastes inn avhengig av skjermens bredde, med høyere oppløsning for større skjermer*/
+/* Should be using <picture> tag ? */
+figure img {
+    width: 100%;
+
+}
+
+
+/* Media-queries for tilpasninger for desktop */
+/* media queries for skjermer bredere enn 680px (eller en valgfribredde), 
+der layout, typografi og bilder justeres for større skjermer. 
+Sørg for at elementene får mer plass, tekst blir større, og at layouten endrer */
+
+/* Tilpass typografi for ulike skjermstørrelser med fokus på god lesbarhet. 
+Dette inkluderer endringer i fontstørrelse, linjeavstand og avstand mellom elementer (marger/padding). 
+hint: calc() som font-size på html i CSS */
+
+@media only screen and (min-width: 680px) {
+
+    #grid-container {
+        grid-template-columns: 1fr 3fr 1fr; /* Add columns for desktop */
+    }
+
+    /* menyen vises horisontalt med logo og lenker ved siden av hverandre */
+    header {
+        grid-column: 1 / 4;
+        grid-row: 1 / 2;
+        flex-direction: row; /* Arrange logo and navigation horizontally */
+        justify-content: space-between; /* Space between logo and nav */
+        align-items: center; /* Vertically center the logo and menu */
+    }
+    
+    nav ul {
+        flex-direction: row; /* Make the navigation horizontal */
+        gap: 2rem; /* Increase spacing between menu items */
+    }
+    
+    /* layouten tilpasses slik at bilder og tekst står ved siden av hverandre */
+    main {
+        grid-column: 1 / 4;
+        grid-row: 2 / 3;
+        flex-direction: row; /* Display main content sections side by side */
+        gap: 2rem; /* Add space between the image and text */
+        align-items: flex-start; /* Align items to the top */
+    }
+    
+    #change-order {
+        display: flex;
+        flex-direction: row-reverse; /* Switch order: image on the right */
+    }
+    
+    /* Logoen skal ligge på en rad/linje og ikke ha noe innholde ved siden av seg, seksjonene skal ligge ved siden av hverandre */
+    footer {
+        grid-column: 1 / 4;
+        grid-row: 3 / 4;
+        flex-direction: row; /* Arrange footer sections horizontally */
+        justify-content: space-between; /* Space out the sections */
+        align-items: flex-start; /* Align items to the top */
+    }
+    
+    /* Typography adjustments for larger screens */
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    body {
+        font-size: 16px; /* Increase body font-size for better readability */
+    }
+}
