@@ -9,12 +9,12 @@
 
 /* Headeren skal ha en vertikal navigasjonsmeny med logoen over menyen. Navigasjonslenkene skal sentreres på mobil */
 header{
-    grid-column: 1 / 2; /* elementet strekker seg fra kolonne-linje 1 til 4 */
-    grid-row: 1 / 2; /* elementet strekker seg fra rad-linje 1 til 2 */
+    grid-column: 1 / 4; /* Ensure header spans across all columns */
+    grid-row: 1 / 2; /* Set the header to occupy only the first row */
     display: flex; /* oppretter flex-container */
     flex-direction: column; /* ordner header (logo og navigasjon) vertikalt */
     justify-content: center; /* sentrerer header horisontalt */
-    align-items: center; /* sentrerer header vertikalt */
+    align-items: center; /* sentrerer logo vertikalt */
 }
 
 nav ul {
@@ -23,33 +23,77 @@ nav ul {
     flex-direction: column; /* elementer i navigasjon legger seg i en horisontal rad fra venstre til høyre */
     gap: 1rem; /* lik avstand mellom lenker */
     justify-content: center; /* sentrerer header horisontalt */
-    align-items: center; /* sentrerer header vertikalt */
+    align-items: center; /* sentrerer logo vertikalt */
 }
 
 /* Innholdet skal vises under hverandre */
 main {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
+    grid-column: 1/4;
+    grid-row: 2/3;
     display: flex; /* oppretter flex-container */
     flex-direction: column; /* elementer i navigasjon legger seg i en horisontal rad fra venstre til høyre */
-    gap: 1rem; /* lik avstand mellom lenker */
+    gap: 1.5 rem; /* lik avstand mellom lenker */
     justify-content: center; /* sentrerer header horisontalt */
     align-items: center; /* sentrerer header vertikalt */
 }
 
-#change-order {
+main section {
+    background-color: #f8f8f8; /* Light gray for distinction */
+    padding: 1.5rem;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
 
+#change-order {
+    display: flex;
+    flex-direction: column;
+    flex-direction: row-reverse; /* Switch order: image on the right */
+}
+
+#tjenester {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout for mobile */
+    gap: 1.5rem; /* Space between the articles */
+    padding: 1rem;
+    background-color: #f5f5f5; /* Add background to the entire section */
+}
+
+#tjenester article {
+    background-color: white; /* Background for each article */
+    padding: 1rem;
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* bilder tilpasses skjermstørrelsen ved hjelp av picture-taggen. 
+Forskjellige bildeoppløsninger skal lastes inn avhengig av skjermens bredde, med høyere oppløsning for større skjermer*/
+/* Should be using <picture> tag ? */
+
+figure img {
+    width: 100%;
+    height: auto;
 }
 
 /* Innholdet skal vises under hverandre */
 footer {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
+    grid-column: 1/4;
+    grid-row: 3/4;
     display: flex; /* oppretter flex-container */
     flex-direction: column; /* elementer i navigasjon legger seg i en horisontal rad fra venstre til høyre */
     gap: 1rem; /* lik avstand mellom lenker */
-    justify-content: center; /* sentrerer header horisontalt */
+    justify-content: space-around; /* sentrerer header horisontalt */
+    padding: 10px;
     align-items: center; /* sentrerer header vertikalt */
+    background-color: #333; /* Dark background for footer */
+    color: white; /* White text */
+}
+
+footer ul {
+    list-style: none; /* Remove bullets */
+    padding: 0;
+}
+
+footer a {
+    color: white; /* Change footer links to white */
 }
 
 /* Trying to figure out responsive typography ?? */
@@ -57,34 +101,17 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     background-color: #f0ece9;
-}
-
-h1{
-    font-size: 2rem;
-}
-h2{
-    font-size: 1.5rem;
-}
-h3{
-    font-size: 1rem;
+    padding: 1rem;
 }
 
 html{
-    font-size: calc(14px + 0.5vw);
+    font-size: calc(1rem + 1vw);
 }
 
 /* Styler alle lenker som vanlig sort tekst */
 a {
     text-decoration: none; /* fjerner understrek fra lenker */
     color: black; /* endrer farge på lenker til svart */
-}
-
-/* bilder tilpasses skjermstørrelsen ved hjelp av picture-taggen. 
-Forskjellige bildeoppløsninger skal lastes inn avhengig av skjermens bredde, med høyere oppløsning for større skjermer*/
-/* Should be using <picture> tag ? */
-figure img {
-    width: 100%;
-
 }
 
 
@@ -101,15 +128,22 @@ hint: calc() som font-size på html i CSS */
 
     #grid-container {
         grid-template-columns: 1fr 3fr 1fr; /* Add columns for desktop */
+        grid-template-rows: repeat(3, auto);
+        grid-template-areas: 
+            "header header header"
+            "main main main"
+            "footer footer footer";
+        gap: 2rem;
     }
 
     /* menyen vises horisontalt med logo og lenker ved siden av hverandre */
     header {
-        grid-column: 1 / 4;
-        grid-row: 1 / 2;
-        flex-direction: row; /* Arrange logo and navigation horizontally */
+        grid-area: header;
+        display: flex;
+        flex-direction: column; /* Arrange logo, navigation and section vertically */
         justify-content: space-between; /* Space between logo and nav */
-        align-items: center; /* Vertically center the logo and menu */
+        align-items: center; /* Vertically center the logo, nav and section */
+        padding: 2rem;
     }
     
     nav ul {
@@ -119,41 +153,50 @@ hint: calc() som font-size på html i CSS */
     
     /* layouten tilpasses slik at bilder og tekst står ved siden av hverandre */
     main {
-        grid-column: 1 / 4;
-        grid-row: 2 / 3;
+        grid-area: main;
         flex-direction: row; /* Display main content sections side by side */
+        flex-wrap: wrap;
         gap: 2rem; /* Add space between the image and text */
-        align-items: flex-start; /* Align items to the top */
     }
     
     #change-order {
         display: flex;
-        flex-direction: row-reverse; /* Switch order: image on the right */
+    }
+
+    #tjenester {
+        grid-template-columns: repeat(4, 1fr); /* Three articles per row */
+        grid-template-rows: repeat(2, auto);
+        gap: 2rem; /* Increase space between articles on desktop */
+    }
+
+    #tjenester h2 {
+        grid-column: 1/5;
+        grid-row: 1/2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tjenester h3 {
+        grid-column: auto;
+        grid-row: 2/3;
     }
     
     /* Logoen skal ligge på en rad/linje og ikke ha noe innholde ved siden av seg, seksjonene skal ligge ved siden av hverandre */
     footer {
-        grid-column: 1 / 4;
-        grid-row: 3 / 4;
+        grid-area: footer;
         flex-direction: row; /* Arrange footer sections horizontally */
         justify-content: space-between; /* Space out the sections */
-        align-items: flex-start; /* Align items to the top */
+        padding: 2rem;
     }
-    
-    /* Typography adjustments for larger screens */
-    h1 {
-        font-size: 2.5rem;
+
+    footer section {
+        display: flex;
+        flex-direction: column;
     }
-    
-    h2 {
-        font-size: 2rem;
-    }
-    
-    h3 {
-        font-size: 1.2rem;
-    }
-    
-    body {
-        font-size: 16px; /* Increase body font-size for better readability */
+
+    footer ul {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }
