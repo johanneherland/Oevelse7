@@ -1,12 +1,23 @@
 /*Mobil-first approach*/
 
-#grid-container {
-    display: grid;  /* oppretter CSS Grid */
-    grid-template-columns: 1 fr; /* kun en kolonne for mobil hvor alt innhold skal vises under hverandre */
-    grid-template-rows: repeat(3, auto); /* tre rader for header, main og footer */
-    padding: 1rem;
+html {
+    font-size: calc(1rem + 1vw); /* responsiv typografi - skriftstørrelse justeres ettersom viewfinder endrer seg */
 }
 
+body {
+    background-color: #ffffffd6;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#grid-container {
+    display: grid;  /* oppretter CSS Grid */
+    grid-template-columns: 1 fr; /* kun en kolonne for mobil hvor alt innhold skal vises un der hverandre */
+    grid-template-rows: repeat(3, auto); /* tre rader for header, main og footer */
+    padding: 1rem;
+    gap: 1rem;
+}
+
+/* Her er logo ikke sentrert direkte over nav, jeg klarer ikke å finne ut hvorfor? */
 /* Headeren skal ha en vertikal navigasjonsmeny med logoen over menyen. Navigasjonslenkene skal sentreres på mobil */
 header {
     grid-column: 1/2; /* plasserer header i kolonnen */ 
@@ -14,45 +25,97 @@ header {
     display: flex; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer headerens innhold som kolonne for vertikal tilpasning til mobil */
     align-items: center;  /* sentrerer header vertikalt */
+    justify-content: space-around;
+}
+
+#logo, #footer-logo {
+    font-size:xx-large;
+    font-weight: bold;
 }
 
 nav {
-    background-color: hsl(475, 20%, 75%);
+    background-color: hsl(0, 0%, 61%);
+    width: 100%;
     display: flex; /* oppretter flex-container */ 
-    flex-direction: column; /* arrangerer menyens innhold som kolonne for vertikal tilpasning til mobil */
-    justify-content: center;  /* sentrerer menyen horisontalt */
-    align-items: center;  /* sentrerer menyen vertikalt */
+    flex-direction: column; /* arrangerer logo og meny som kolonne for vertikal tilpasning til mobil */
+    align-items: center;  /* sentrerer logo og meny vertikalt */
+    gap: 1rem;
+}
+
+/* Her har jeg bare repetert det samme som allerede står i nav - gjør det noen forskjell? */
+nav ul {
+    display: flex; /* oppretter flex-container */ 
+    flex-direction: column; /* arrangerer logo og meny som kolonne for vertikal tilpasning til mobil */
+    align-items: center;  /* sentrerer logo og meny vertikalt */
+    gap: 1rem;
 }
 
 /* Innholdet i main skal vises under hverandre */
 main {
     grid-column: 1/2; /* plasserer hovedinnhold i kolonnen */ 
     grid-row: 2/3; /* plasserer hovedinnhold i andre rad */ 
+    gap: 1rem;
     display: flex; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer hovedinnhold som kolonne for vertikal tilpasning til mobil */
     flex-wrap: wrap; /* elementer som ikke passer på den gjeldende linjen legger seg på en ny linje under, slik at alt innhold vises i kolonnen synlig på mobil */
-    justify-content: center;  /* sentrerer hovedinnhold horisontalt */
     align-items: center;  /* sentrerer hovedinnhold vertikalt */
+}
+
+#change-order {
+    display: flex; /* oppretter flexbox */
+    flex-direction: column-reverse; /* sørger for at bilde og tekst dukker opp i riktig rekkefølge på mobil da det står i motsatt rekkefølge i html */
+}
+
+#tjenester {
+    display: grid; /* oppretter css grid */
+    grid-template-columns: 1fr; /* en kolonne for layout for mobil */
+    gap: 1.5rem; /* rom mellom artikler */
+    padding: 1rem; /* rom mellom seksjon og resten av siden*/ 
+    background-color: #b2b2b2; /* setter egen bakgrunnsfarge for tjenesteseksjonen */
+}
+
+#tjenester article {
+    background-color: #c9c9c9; /* setter egen farge for hver artikkel */
+    border-radius: 8px; /* avrundede hjørner på artikler */
+    padding: 1rem; /* luft mellom artikkelinnhold og annet innhold */
 }
 
 /* Innholdet i footer skal vises under hverandre */
 footer {
-    background-color: hsl(475, 20%, 75%);
+    background-color: hsl(0, 0%, 61%); /* setter bakgrunnsfarge på footer for å skille fra resten av siden */
     grid-column: 1/2; /* plasserer footer i kolonnen */
     grid-row: 3/4; /* plasserer footer i tredje rad */ 
     display: flex; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer footer som kolonne for vertikal tilpasning til mobil */
-    justify-content: center;  /* sentrerer footer horisontalt */
     align-items: center;  /* sentrerer footer vertikalt */
+    justify-content: space-around;
+}
+
+footer section {
+    display: flex; /* oppretter flex-container */ 
+    flex-direction: column; /* arrangerer footer som kolonne for vertikal tilpasning til mobil */
+    align-items: center;  /* sentrerer footer vertikalt */
+    justify-content: space-around;
 }
 
 a {
-    text-decoration: none;
-    color: black;
+    text-decoration: none; /* fjerner understrek fra linker */
+    color: black; /* setter farge på linker til svart for å matche resten av siden */
 }
 
 ul {
-    list-style: none;
+    list-style: none; /* fjerner bullet points fra alle lister */
+}
+
+.btn {
+    outline-style: solid;
+    outline-color: black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+picture img {
+    width: 100%; /* sørger for at bredden på bilder matcher bredden på foreldreelementet*/
 }
 
 /* Media-queries for tilpasninger for desktop */
@@ -67,30 +130,68 @@ hint: calc() som font-size på html i CSS */
 @media only screen and (min-width: 680px) {
 
     #grid-container {
-        grid-template-columns: 0.5fr 3fr 0.5fr;
+        grid-template-columns: 0.5fr 2fr 2fr 0.5fr;
         grid-template-rows: repeat(3, auto);
     }
 
+    /* Fra 680px (du kan velge annen bredde) bredde skal menyen vises horisontalt med logo og lenker ved siden av hverandre */
     header {
-        grid-column: 1/4; /* plasserer header i kolonnen */ 
+        grid-column: 1/5; /* plasserer header i kolonnen */ 
         grid-row: 1/2; /* plasserer header i første rad */ 
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
     }
 
-    nav ul {
+    header nav {
+        grid-column: 1/5; /* plasserer header i kolonnen */ 
+        grid-row: 1/2; /* plasserer header i første rad */ 
         display: flex;
         flex-direction: row;
-        gap: 2rem;
+    }
+
+    #logo {
+        display: flex;
+        justify-content: start;
+    }
+
+    /* Hvordan får jeg menyen til å være på høre side? */
+    header nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
     }
 
     main {
-        grid-column: 2/3; /* plasserer hovedinnhold i kolonnen */ 
+        grid-column: 2/4; /* plasserer hovedinnhold i kolonnen */ 
         grid-row: 2/3; /* plasserer hovedinnhold i andre rad */
-    } 
+        flex-direction: row;
+    }
+
+    #tjenester {
+        grid-template-columns: repeat(4, 1fr); /* en kolonne for hver artikkel, fire kolonner */
+        grid-template-rows: repeat(2, auto);
+    }
+
+    #tjenester h2 {
+        grid-column: 1/5;
+        grid-row: 1/2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tjenester h3 {
+        grid-column: auto;
+        grid-row: 2/3;
+    }
 
     footer {
-        grid-column: 1/4; /* plasserer footer i kolonnen */
-        grid-row: 3/4; /* plasserer footer i tredje rad */     
+        grid-column: 1/5; /* plasserer footer i kolonnen */
+        grid-row: 3/4; /* plasserer footer i tredje rad */  
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 5rem;
     }
 }
