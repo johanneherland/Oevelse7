@@ -11,15 +11,14 @@
 header {
     grid-column: 1/2; /* plasserer header i kolonnen */ 
     grid-row: 1/2; /* plasserer header i første rad */ 
-    display: flexbox; /* oppretter flex-container */ 
+    display: flex; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer headerens innhold som kolonne for vertikal tilpasning til mobil */
-    justify-content: center;  /* sentrerer header horisontalt */
     align-items: center;  /* sentrerer header vertikalt */
 }
 
 nav {
     background-color: hsl(475, 20%, 75%);
-    display: flexbox; /* oppretter flex-container */ 
+    display: flex; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer menyens innhold som kolonne for vertikal tilpasning til mobil */
     justify-content: center;  /* sentrerer menyen horisontalt */
     align-items: center;  /* sentrerer menyen vertikalt */
@@ -29,7 +28,7 @@ nav {
 main {
     grid-column: 1/2; /* plasserer hovedinnhold i kolonnen */ 
     grid-row: 2/3; /* plasserer hovedinnhold i andre rad */ 
-    display: flexbox; /* oppretter flex-container */ 
+    display: flex; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer hovedinnhold som kolonne for vertikal tilpasning til mobil */
     flex-wrap: wrap; /* elementer som ikke passer på den gjeldende linjen legger seg på en ny linje under, slik at alt innhold vises i kolonnen synlig på mobil */
     justify-content: center;  /* sentrerer hovedinnhold horisontalt */
@@ -41,7 +40,7 @@ footer {
     background-color: hsl(475, 20%, 75%);
     grid-column: 1/2; /* plasserer footer i kolonnen */
     grid-row: 3/4; /* plasserer footer i tredje rad */ 
-    display: flexbox; /* oppretter flex-container */ 
+    display: flex; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer footer som kolonne for vertikal tilpasning til mobil */
     justify-content: center;  /* sentrerer footer horisontalt */
     align-items: center;  /* sentrerer footer vertikalt */
@@ -54,4 +53,44 @@ a {
 
 ul {
     list-style: none;
+}
+
+/* Media-queries for tilpasninger for desktop */
+/* media queries for skjermer bredere enn 680px (eller en valgfribredde), 
+der layout, typografi og bilder justeres for større skjermer. 
+Sørg for at elementene får mer plass, tekst blir større, og at layouten endrer */
+
+/* Tilpass typografi for ulike skjermstørrelser med fokus på god lesbarhet. 
+Dette inkluderer endringer i fontstørrelse, linjeavstand og avstand mellom elementer (marger/padding). 
+hint: calc() som font-size på html i CSS */
+
+@media only screen and (min-width: 680px) {
+
+    #grid-container {
+        grid-template-columns: 0.5fr 3fr 0.5fr;
+        grid-template-rows: repeat(3, auto);
+    }
+
+    header {
+        grid-column: 1/4; /* plasserer header i kolonnen */ 
+        grid-row: 1/2; /* plasserer header i første rad */ 
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    main {
+        grid-column: 2/3; /* plasserer hovedinnhold i kolonnen */ 
+        grid-row: 2/3; /* plasserer hovedinnhold i andre rad */
+    } 
+
+    footer {
+        grid-column: 1/4; /* plasserer footer i kolonnen */
+        grid-row: 3/4; /* plasserer footer i tredje rad */     
+    }
 }
