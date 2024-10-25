@@ -4,7 +4,7 @@
     display: grid;  /* oppretter CSS Grid */
     grid-template-columns: 1 fr; /* kun en kolonne for mobil hvor alt innhold skal vises under hverandre */
     grid-template-rows: repeat(3, auto); /* tre rader for header, main og footer */
-    padding: 1rem; /* gir pusterom mellom nettsidens rammer og innholdet */
+    padding: 1rem;
 }
 
 /* Headeren skal ha en vertikal navigasjonsmeny med logoen over menyen. Navigasjonslenkene skal sentreres på mobil */
@@ -17,23 +17,41 @@ header {
     align-items: center;  /* sentrerer header vertikalt */
 }
 
+nav {
+    background-color: hsl(475, 20%, 75%);
+    display: flexbox; /* oppretter flex-container */ 
+    flex-direction: column; /* arrangerer menyens innhold som kolonne for vertikal tilpasning til mobil */
+    justify-content: center;  /* sentrerer menyen horisontalt */
+    align-items: center;  /* sentrerer menyen vertikalt */
+}
+
 /* Innholdet i main skal vises under hverandre */
 main {
     grid-column: 1/2; /* plasserer hovedinnhold i kolonnen */ 
     grid-row: 2/3; /* plasserer hovedinnhold i andre rad */ 
     display: flexbox; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer hovedinnhold som kolonne for vertikal tilpasning til mobil */
+    flex-wrap: wrap; /* elementer som ikke passer på den gjeldende linjen legger seg på en ny linje under, slik at alt innhold vises i kolonnen synlig på mobil */
     justify-content: center;  /* sentrerer hovedinnhold horisontalt */
     align-items: center;  /* sentrerer hovedinnhold vertikalt */
 }
 
 /* Innholdet i footer skal vises under hverandre */
 footer {
-    grid-column: 1/2;
-    grid-row: 3/4;
+    background-color: hsl(475, 20%, 75%);
+    grid-column: 1/2; /* plasserer footer i kolonnen */
+    grid-row: 3/4; /* plasserer footer i tredje rad */ 
     display: flexbox; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer footer som kolonne for vertikal tilpasning til mobil */
     justify-content: center;  /* sentrerer footer horisontalt */
     align-items: center;  /* sentrerer footer vertikalt */
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    list-style: none;
+}
