@@ -22,7 +22,6 @@ body {
 header {
     grid-column: 1/2; /* plasserer header i kolonnen */ 
     grid-row: 1/2; /* plasserer header i første rad */ 
-    display: flex; /* oppretter flex-container */ 
     flex-direction: column; /* arrangerer headerens innhold som kolonne for vertikal tilpasning til mobil */
     align-items: center;  /* sentrerer header vertikalt */
     justify-content: space-around;
@@ -107,6 +106,7 @@ ul {
     list-style: none; /* fjerner bullet points fra alle lister */
 }
 
+/* styler knapper for å skille fra vanlig tekst */ 
 .btn {
     outline-style: solid;
     outline-color: black;
@@ -114,6 +114,8 @@ ul {
     padding: 5px;
 }
 
+
+/* Jeg tror ikke dette funker? Har jeg gjort <picture> feil?? */
 picture img {
     width: 100%; /* sørger for at bredden på bilder matcher bredden på foreldreelementet*/
 }
@@ -129,6 +131,7 @@ hint: calc() som font-size på html i CSS */
 
 @media only screen and (min-width: 680px) {
 
+    /* ALT er feil i grid på desktop ???? */
     #grid-container {
         grid-template-columns: 0.5fr 2fr 2fr 0.5fr;
         grid-template-rows: repeat(3, auto);
@@ -155,13 +158,14 @@ hint: calc() som font-size på html i CSS */
         justify-content: start;
     }
 
-    /* Hvordan får jeg menyen til å være på høre side? */
+    /* Hvordan får jeg menyen til å være på høre side??? */
     header nav ul {
         display: flex;
         flex-direction: row;
         justify-content: end;
     }
 
+    /* Innhold skal stå ved siden av hverandre på desktop - det gjør de ikke, hvordan fikse det?? */
     main {
         grid-column: 2/4; /* plasserer hovedinnhold i kolonnen */ 
         grid-row: 2/3; /* plasserer hovedinnhold i andre rad */
@@ -186,6 +190,7 @@ hint: calc() som font-size på html i CSS */
         grid-row: 2/3;
     }
 
+    /* Footer-logo skal ligge over resten footer-nav - det gjør den ikke her */
     footer {
         grid-column: 1/5; /* plasserer footer i kolonnen */
         grid-row: 3/4; /* plasserer footer i tredje rad */  
